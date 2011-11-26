@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: clojure | brweber2 blog]]></title>
+  <link href="http://brweber2-blog.heroku.com/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://brweber2-blog.heroku.com/"/>
+  <updated>2011-11-25T23:42:48-05:00</updated>
+  <id>http://brweber2-blog.heroku.com/</id>
+  <author>
+    <name><![CDATA[brweber2]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello Clojure]]></title>
+    <link href="http://brweber2-blog.heroku.com/blog/2011/11/25/hello-clojure/"/>
+    <updated>2011-11-25T23:25:00-05:00</updated>
+    <id>http://brweber2-blog.heroku.com/blog/2011/11/25/hello-clojure</id>
+    <content type="html"><![CDATA[<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (hello.clj)</span> <a href='/downloads/code/hello.clj'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clj'><span class='line'><span class="p">(</span><span class="nf">ns</span> <span class="nv">my</span><span class="o">.</span><span class="nv">ns</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">greet</span> <span class="p">[</span><span class="nv">name</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Hello&quot;</span> <span class="nv">name</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">greet</span> <span class="s">&quot;User&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>
