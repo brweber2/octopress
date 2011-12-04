@@ -1,0 +1,8 @@
+(def key-token-format (binary-protocol (ByteBasedChunker.)
+    (section :KEY_TOKEN_ID,            (FixedLength. 2))
+    (section :INCLUDES_PRIVATE_KEY,    (EnumeratedValue. 1 (IncludesPrivateKey.)))
+    (section :PRIVATE_KEY,             (DependentValue. 256 (PrivateKeyPresent.)))
+    (section :PUBLIC_KEY_LENGTH,       (FixedLength. 2))
+    (section :PUBLIC_KEY,              (DependentFixedLength. (PublicKeyLength.)))
+    (section :THROW_AWAY,              (VariableLength. (StopAt. [\F \G])))
+    (section :THE_END,                 (EnumeratedValue. 2 (AllDone.)))))

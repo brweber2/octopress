@@ -4,7 +4,7 @@
   <title><![CDATA[Category: software | brweber2 blog]]></title>
   <link href="http://brweber2-blog.heroku.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://brweber2-blog.heroku.com/"/>
-  <updated>2011-11-25T23:42:48-05:00</updated>
+  <updated>2011-12-03T23:41:41-05:00</updated>
   <id>http://brweber2-blog.heroku.com/</id>
   <author>
     <name><![CDATA[brweber2]]></name>
@@ -12,6 +12,166 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A binary file viewer]]></title>
+    <link href="http://brweber2-blog.heroku.com/blog/2011/12/03/a-binary-file-viewer/"/>
+    <updated>2011-12-03T22:20:00-05:00</updated>
+    <id>http://brweber2-blog.heroku.com/blog/2011/12/03/a-binary-file-viewer</id>
+    <content type="html"><![CDATA[<p>There are a lot of binary file viewers in the world.  A <em>lot</em>. So why one more?  First of all, because I want to be able to view more than a hex dump.  I want to be able to describe the rules of the file format and I want the application to show me semantic meaning in the output.  Surely this exists as well?  You betcha, in spades.  But it is more fun to write the code when you have some time to kill at a conference. :)</p>
+
+<p>Of course, this can all be done trivially until the rules get a little more complex.  What if the fifth section of the file is only present if the third section had a particular value?  What if the length of the sixth section was the value from the fourth section?  What if our rules are so complex they require code to describe the relationships among the sections?  Enter binpv.</p>
+
+<p>Yeah, yeah, yeah, so the name 'binpv' is terrible. I know, but let's take a look at binary file specification example:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (spec.clj)</span> <a href='/downloads/code/binpv/spec.clj'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clj'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">key-token-format</span> <span class="p">(</span><span class="nf">binary-protocol</span> <span class="p">(</span><span class="nf">ByteBasedChunker</span><span class="o">.</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">section</span> <span class="nv">:KEY_TOKEN_ID,</span>            <span class="p">(</span><span class="nf">FixedLength</span><span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">section</span> <span class="nv">:INCLUDES_PRIVATE_KEY,</span>    <span class="p">(</span><span class="nf">EnumeratedValue</span><span class="o">.</span> <span class="mi">1</span> <span class="p">(</span><span class="nf">IncludesPrivateKey</span><span class="o">.</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">section</span> <span class="nv">:PRIVATE_KEY,</span>             <span class="p">(</span><span class="nf">DependentValue</span><span class="o">.</span> <span class="mi">256</span> <span class="p">(</span><span class="nf">PrivateKeyPresent</span><span class="o">.</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">section</span> <span class="nv">:PUBLIC_KEY_LENGTH,</span>       <span class="p">(</span><span class="nf">FixedLength</span><span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">section</span> <span class="nv">:PUBLIC_KEY,</span>              <span class="p">(</span><span class="nf">DependentFixedLength</span><span class="o">.</span> <span class="p">(</span><span class="nf">PublicKeyLength</span><span class="o">.</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">section</span> <span class="nv">:THROW_AWAY,</span>              <span class="p">(</span><span class="nf">VariableLength</span><span class="o">.</span> <span class="p">(</span><span class="nf">StopAt</span><span class="o">.</span> <span class="p">[</span><span class="sc">\F</span> <span class="sc">\G</span><span class="p">])))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">section</span> <span class="nv">:THE_END,</span>                 <span class="p">(</span><span class="nf">EnumeratedValue</span><span class="o">.</span> <span class="mi">2</span> <span class="p">(</span><span class="nf">AllDone</span><span class="o">.</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That's reasonably declarative!  Let's break it into pieces.</p>
+
+<p><code>clojure
+binary-protocol (ByteBasedChunker.)
+</code></p>
+
+<p>We have a binary protocol that reads a byte at a time.  OK, so far so good.</p>
+
+<p><code>clojure
+(section :KEY_TOKEN_ID,            (FixedLength. 2))
+</code></p>
+
+<p>Hmm, it looks like the file starts off with the key token id, which is a fixed length field.  The field must be two bytes, because we know we're reading two bytes at a time.</p>
+
+<p><code>clojure
+(section :INCLUDES_PRIVATE_KEY,    (EnumeratedValue. 1 (IncludesPrivateKey.)))
+</code></p>
+
+<p>OK, it looks like our next section is the private key.  It is a one byte enumerated value.  That means we have a fixed set of possible values, but what could they be?  Well, here we encounter the first place we have to provide some code.</p>
+
+<p>We're going to have to define a function that will take the value (a stream of 1 byte in this case) and return our value.  A Clojure prototype has been defined just for this purpose.  It looks like:</p>
+
+<p>``` clojure
+(defprotocol AnEnumeration</p>
+
+<pre><code>(get-value [this match-seq]))
+</code></pre>
+
+<p>```</p>
+
+<p>So we just have to extend the prototype.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (enum_example.clj)</span> <a href='/downloads/code/binpv/enum_example.clj'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clj'><span class='line'><span class="p">(</span><span class="nf">deftype</span> <span class="nv">IncludesPrivateKey</span>
+</span><span class='line'>    <span class="p">[]</span>
+</span><span class='line'>    <span class="nv">AnEnumeration</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">get-value</span> <span class="p">[</span><span class="nv">this</span> <span class="nv">match-seq</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">first-match</span> <span class="p">(</span><span class="nb">first </span><span class="nv">match-seq</span><span class="p">)]</span>
+</span><span class='line'>            <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">nil? </span><span class="nv">first-match</span><span class="p">)</span>
+</span><span class='line'>                <span class="nv">:eof</span>
+</span><span class='line'>                <span class="p">(</span><span class="nf">case</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">Character/toChars</span> <span class="nv">first-match</span><span class="p">))</span>
+</span><span class='line'>                    <span class="sc">\v</span> <span class="nv">:private</span>
+</span><span class='line'>                    <span class="sc">\b</span> <span class="nv">:public</span>
+</span><span class='line'>        			<span class="nv">:unknown</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>There is a fair bit of boilerplate there for converting the stream of bytes to a character so find out if it is a 'v' or a 'p'.  This can undoubtedly be simplified, but like I said before, this is what you get from rushed conference driven development.</p>
+
+<p>I won't bore you going through the rest of the sections in detail, but suffice it to say that there are only a few places you have to plug in code.</p>
+
+<ul>
+<li>PrivateKeyPresent - extends DependentFun prototype</li>
+<li>PublicKeyLength - extends DependentLength prototype</li>
+<li>[\F \G] - the sequence that ends the section</li>
+<li>AllDone - extends AnEnumeration prototype</li>
+</ul>
+
+
+<p>So once you have declared your binary specification and written a the logic that is custom to your format, all that there is left to do is to is parse the file and view it.</p>
+
+<p><code>clojure
+(def parsed (parse-binary (FileStreamWrapper. test-file) key-token-format))
+</code></p>
+
+<p>Wait, you keep the parsed file in memory??? So this won't work with large files!?  Correct!  Maybe I should have called this 'can fit into memory binary file parser' or something like that.  Did I mention something about conference driven development yet?  So why did I choose to do this?  Laziness?  Perhaps, but we also have rules that depend on the values of previous sections.  If I went with a streaming model then that information would have been lost.  Unless there was a filter that was smart enough to know which values really mattered and had to be kept.  Maybe someday I'll add a compiler with these smarts, but for now the file has to fit into memory.</p>
+
+<p>So last, but not least we have to display our parsed file.</p>
+
+<p><code>clojure
+(visualize-binary (take 7 (repeat (HexVisualizer.))) parsed)
+</code></p>
+
+<p>What is going on there?  Whoa nelly.  Actually, each section can be viewed with its own visualizer.  In my sample file specification I had seven sections, so I need 7 visualizers.  Here is what the output of running our program looks like.</p>
+
+<p>```
+:KEY_TOKEN_ID
+00000000:  4A 4B 00 00 00 00 00 00-00 00 00 00 00 00 00 00  JK......-........</p>
+
+<p>:INCLUDES_PRIVATE_KEY
+:unknown</p>
+
+<p>:PRIVATE_KEY
+nil</p>
+
+<p>:PUBLIC_KEY_LENGTH
+00000000:  85 4C 00 00 00 00 00 00-00 00 00 00 00 00 00 00  .L......-........</p>
+
+<p>:PUBLIC_KEY
+00000000:  4D 4E 4F 50 51 52 53 54-55 56 57 58 59 5A 5B 5C  MNOPQRST-UVWXYZ[\
+00000010:  5D 5E 5F 60 61 62 63 64-65 66 67 68 69 6A 6B 6C  ]<sup>_`abcd-efghijkl</sup>
+00000020:  6D 6E 6F 70 71 72 73 74-75 76 77 78 79 7A 7B 7C  mnopqrst-uvwxyz{|
+00000030:  7D 7E 7F C3 85 C3 87 C3-89 C3 91 C3 96 C3 9C C3  }~......-........
+00000040:  A1 C3 A0 C3 A2 C3 A4 C3-A3 C3 A5 C3 A7 C3 A9 C3  ........-........
+00000050:  A8 C3 AA C3 AB C3 AD C3-AC C3 AE C3 AF C3 B1 C3  ........-........
+00000060:  B3 C3 B2 C3 B4 C3 B6 C3-B5 C3 BA C3 B9 C3 BB C3  ........-........
+00000070:  BC E2 80 A0 C2 B0 C2 A2-C2 A3 C2 A7 E2 80 A2 C2  ........-........
+00000080:  B6 C3 9F C2 AE 00 00 00-00 00 00 00 00 00 00 00  ........-........</p>
+
+<p>:THROW_AWAY
+00000000:  46 47 00 00 00 00 00 00-00 00 00 00 00 00 00 00  FG......-........</p>
+
+<p>:THE_END
+false
+```</p>
+
+<ul>
+<li>It is pretty?  No.</li>
+<li>Is it robust?  No.</li>
+<li>Can the code be improved?  Yes.</li>
+<li>Is it a solid starting point?  Yes.</li>
+</ul>
+
+
+<p>Hopefully you find it a useful tool if you try to use it because with just a tiny bit of code, you can view your binary files pretty easily.</p>
+
+<p>Thanks to Dave Sletten for the hex dump utility.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Clojure]]></title>

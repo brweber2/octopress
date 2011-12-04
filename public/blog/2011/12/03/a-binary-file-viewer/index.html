@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>brweber2 blog</title>
+  <title>A binary file viewer - brweber2 blog</title>
   <meta name="author" content="brweber2">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://brweber2-blog.heroku.com">
+  <link rel="canonical" href="http://brweber2-blog.heroku.com/blog/2011/12/03/a-binary-file-viewer">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -60,15 +60,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/12/03/a-binary-file-viewer/">A Binary File Viewer</a></h1>
+      <h1 class="entry-title">A Binary File Viewer</h1>
     
     
       <p class="meta">
@@ -91,7 +88,7 @@
   </header>
 
 
-  <div class="entry-content"><p>There are a lot of binary file viewers in the world.  A <em>lot</em>. So why one more?  First of all, because I want to be able to view more than a hex dump.  I want to be able to describe the rules of the file format and I want the application to show me semantic meaning in the output.  Surely this exists as well?  You betcha, in spades.  But it is more fun to write the code when you have some time to kill at a conference. :)</p>
+<div class="entry-content"><p>There are a lot of binary file viewers in the world.  A <em>lot</em>. So why one more?  First of all, because I want to be able to view more than a hex dump.  I want to be able to describe the rules of the file format and I want the application to show me semantic meaning in the output.  Surely this exists as well?  You betcha, in spades.  But it is more fun to write the code when you have some time to kill at a conference. :)</p>
 
 <p>Of course, this can all be done trivially until the rules get a little more complex.  What if the fifth section of the file is only present if the third section had a particular value?  What if the length of the sixth section was the value from the fourth section?  What if our rules are so complex they require code to describe the relationships among the sections?  Enter binpv.</p>
 
@@ -278,22 +275,16 @@
 
 <p>Thanks to Dave Sletten for the hex dump utility.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/11/25/hello-clojure/">Hello Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">brweber2</span></span>
+
+      
 
 
 
@@ -305,41 +296,40 @@
   
 
 
-<time datetime="2011-11-25T23:25:00-05:00" pubdate data-updated="true">Nov 25<span>th</span>, 2011</time>
-        
-      </p>
+<time datetime="2011-12-03T22:20:00-05:00" pubdate data-updated="true">Dec 3<span>rd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/software/'>software</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://brweber2-blog.heroku.com/blog/2011/12/03/a-binary-file-viewer/" data-via="brweber2" data-counturl="http://brweber2-blog.heroku.com/blog/2011/12/03/a-binary-file-viewer/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
 
-
-  <div class="entry-content"><figure class='code'><figcaption><span> (hello.clj)</span> <a href='/downloads/code/hello.clj'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clj'><span class='line'><span class="p">(</span><span class="nf">ns</span> <span class="nv">my</span><span class="o">.</span><span class="nv">ns</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">greet</span> <span class="p">[</span><span class="nv">name</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Hello&quot;</span> <span class="nv">name</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">greet</span> <span class="s">&quot;User&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/11/25/hello-clojure/" title="Previous Post: Hello Clojure">&laquo; Hello Clojure</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -360,7 +350,7 @@
 <section>
   <h1>Github Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/brweber2">@brweber2</a> on Github
@@ -390,7 +380,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -418,6 +408,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
