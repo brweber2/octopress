@@ -26,7 +26,7 @@ We have a binary protocol that reads a byte at a time.  OK, so far so good.
 (section :KEY_TOKEN_ID,            (FixedLength. 2))
 ```
 
-Hmm, it looks like the file starts off with the key token id, which is a fixed length field.  The field must be two bytes, because we know we're reading two bytes at a time.
+Hmm, it looks like the file starts off with the key token id, which is a fixed length field.  The field must be two bytes, because we know we're reading bytes.
 
 ``` clojure
 (section :INCLUDES_PRIVATE_KEY,    (EnumeratedValue. 1 (IncludesPrivateKey.)))
@@ -45,7 +45,7 @@ So we just have to extend the prototype.
 
 {% include_code binpv/enum_example.clj %}
 
-There is a fair bit of boilerplate there for converting the stream of bytes to a character so find out if it is a 'v' or a 'p'.  This can undoubtedly be simplified, but like I said before, this is what you get from rushed conference driven development.
+There is a fair bit of boilerplate there for converting the stream of bytes to a character to find out if it is a 'v' or a 'p'.  This can undoubtedly be simplified, but like I said before, this is what you get from rushed conference driven development.
 
 I won't bore you going through the rest of the sections in detail, but suffice it to say that there are only a few places you have to plug in code.
 
@@ -54,15 +54,15 @@ I won't bore you going through the rest of the sections in detail, but suffice i
 * [\F \G] - the sequence that ends the section
 * AllDone - extends AnEnumeration prototype
 
-So once you have declared your binary specification and written a the logic that is custom to your format, all that there is left to do is to is parse the file and view it.
+So once you have declared your binary specification and written a the logic that is custom to your format, all that there is left to do is to is parse the file and view it.  Let's parse it first.
 
 ``` clojure
 (def parsed (parse-binary (FileStreamWrapper. test-file) key-token-format))
 ```
 
-Wait, you keep the parsed file in memory??? So this won't work with large files!?  Correct!  Maybe I should have called this 'can fit into memory binary file parser' or something like that.  Did I mention something about conference driven development yet?  So why did I choose to do this?  Laziness?  Perhaps, but we also have rules that depend on the values of previous sections.  If I went with a streaming model then that information would have been lost.  Unless there was a filter that was smart enough to know which values really mattered and had to be kept.  Maybe someday I'll add a compiler with these smarts, but for now the file has to fit into memory.
+Wait, you keep the parsed file in memory??? So this won't work with large files!?  Correct!  Maybe I should have called this 'can fit into memory binary file parser' or something like that.  Did I mention something about conference driven development yet?  So why did I choose to do this?  Laziness?  Perhaps, but we also have rules that depend on the values of previous sections.  If I went with a streaming model then that information would have been lost.  Unless there was a filter that was smart enough to know which values really mattered and had to be kept and discarded the rest.  Maybe someday I'll add a compiler with these smarts, but for now the file has to fit into memory.
 
-So last, but not least we have to display our parsed file.
+So last but not least, we have to display our parsed file.
 
 ``` clojure
 (visualize-binary (take 7 (repeat (HexVisualizer.))) parsed)
@@ -101,11 +101,18 @@ nil
 false
 ```
 
+And there you have it.  The whole enchilada.
+
 * It is pretty?  No.
 * Is it robust?  No.  
 * Can the code be improved?  Yes.
 * Is it a solid starting point?  Yes.
 
-Hopefully you find it a useful tool if you try to use it because with just a tiny bit of code, you can view your binary files pretty easily.
+Hopefully you find it a useful tool if you decide to try it out because with just a tiny bit of code, you can view your binary files with the semantic information you really care about.
+
+
+
+
+
 
 Thanks to Dave Sletten for the hex dump utility.

@@ -131,7 +131,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Hmm, it looks like the file starts off with the key token id, which is a fixed length field.  The field must be two bytes, because we know we&#8217;re reading two bytes at a time.</p>
+<p>Hmm, it looks like the file starts off with the key token id, which is a fixed length field.  The field must be two bytes, because we know we&#8217;re reading bytes.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">section</span> <span class="nv">:INCLUDES_PRIVATE_KEY,</span>    <span class="p">(</span><span class="nf">EnumeratedValue</span><span class="o">.</span> <span class="mi">1</span> <span class="p">(</span><span class="nf">IncludesPrivateKey</span><span class="o">.</span><span class="p">)))</span>
@@ -177,7 +177,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>There is a fair bit of boilerplate there for converting the stream of bytes to a character so find out if it is a &#8216;v&#8217; or a &#8216;p&#8217;.  This can undoubtedly be simplified, but like I said before, this is what you get from rushed conference driven development.</p>
+<p>There is a fair bit of boilerplate there for converting the stream of bytes to a character to find out if it is a &#8216;v&#8217; or a &#8216;p&#8217;.  This can undoubtedly be simplified, but like I said before, this is what you get from rushed conference driven development.</p>
 
 <p>I won&#8217;t bore you going through the rest of the sections in detail, but suffice it to say that there are only a few places you have to plug in code.</p>
 
@@ -189,16 +189,16 @@
 </ul>
 
 
-<p>So once you have declared your binary specification and written a the logic that is custom to your format, all that there is left to do is to is parse the file and view it.</p>
+<p>So once you have declared your binary specification and written a the logic that is custom to your format, all that there is left to do is to is parse the file and view it.  Let&#8217;s parse it first.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">parsed</span> <span class="p">(</span><span class="nf">parse-binary</span> <span class="p">(</span><span class="nf">FileStreamWrapper</span><span class="o">.</span> <span class="nv">test-file</span><span class="p">)</span> <span class="nv">key-token-format</span><span class="p">))</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Wait, you keep the parsed file in memory??? So this won&#8217;t work with large files!?  Correct!  Maybe I should have called this &#8216;can fit into memory binary file parser&#8217; or something like that.  Did I mention something about conference driven development yet?  So why did I choose to do this?  Laziness?  Perhaps, but we also have rules that depend on the values of previous sections.  If I went with a streaming model then that information would have been lost.  Unless there was a filter that was smart enough to know which values really mattered and had to be kept.  Maybe someday I&#8217;ll add a compiler with these smarts, but for now the file has to fit into memory.</p>
+<p>Wait, you keep the parsed file in memory??? So this won&#8217;t work with large files!?  Correct!  Maybe I should have called this &#8216;can fit into memory binary file parser&#8217; or something like that.  Did I mention something about conference driven development yet?  So why did I choose to do this?  Laziness?  Perhaps, but we also have rules that depend on the values of previous sections.  If I went with a streaming model then that information would have been lost.  Unless there was a filter that was smart enough to know which values really mattered and had to be kept and discarded the rest.  Maybe someday I&#8217;ll add a compiler with these smarts, but for now the file has to fit into memory.</p>
 
-<p>So last, but not least we have to display our parsed file.</p>
+<p>So last but not least, we have to display our parsed file.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">visualize-binary</span> <span class="p">(</span><span class="nb">take </span><span class="mi">7</span> <span class="p">(</span><span class="nb">repeat </span><span class="p">(</span><span class="nf">HexVisualizer</span><span class="o">.</span><span class="p">)))</span> <span class="nv">parsed</span><span class="p">)</span>
@@ -266,6 +266,8 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>And there you have it.  The whole enchilada.</p>
+
 <ul>
 <li>It is pretty?  No.</li>
 <li>Is it robust?  No.</li>
@@ -274,7 +276,7 @@
 </ul>
 
 
-<p>Hopefully you find it a useful tool if you try to use it because with just a tiny bit of code, you can view your binary files pretty easily.</p>
+<p>Hopefully you find it a useful tool if you decide to try it out because with just a tiny bit of code, you can view your binary files with the semantic information you really care about.</p>
 
 <p>Thanks to Dave Sletten for the hex dump utility.</p>
 </div>
