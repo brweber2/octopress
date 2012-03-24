@@ -2,7 +2,7 @@
 layout: post
 title: "Introducing Logic-Redux"
 date: 2012-03-24 18:25
-comments: true
+comments: false
 categories: [Prolog, Logic Programming, Programming Languages]
 ---
 If you are a professional programmer and you are not familiar with logic programming, then you should add it to your list of things to learn. It should probably be at, or at least very near, the front of the list as well.
