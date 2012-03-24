@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Forth | brweber2 blog]]></title>
+  <link href="http://brweber2-blog.heroku.com/blog/categories/forth/atom.xml" rel="self"/>
+  <link href="http://brweber2-blog.heroku.com/"/>
+  <updated>2012-03-24T19:45:07-04:00</updated>
+  <id>http://brweber2-blog.heroku.com/</id>
+  <author>
+    <name><![CDATA[brweber2]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Concat-Redux]]></title>
+    <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux/"/>
+    <updated>2012-03-24T18:25:00-04:00</updated>
+    <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux</id>
+    <content type="html"><![CDATA[<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
+
+<p>Concat-redux can be found here: https://github.com/brweber2/concat-redux</p>
+
+<p>concat-redux introduces one new piece of syntactic sugar to help with reading the language.</p>
+
+<p>A typical example would look like (reverse Polish notation):</p>
+
+<p>5 3 +</p>
+
+<p>Another example might be:</p>
+
+<p>"hello" "world" concat</p>
+
+<p>concat-redux introduces a new meaning to ':'</p>
+
+<p>Any word prefixed by a colon ':' is pushed before the next period '.'</p>
+
+<p>This enables the author to write the same code as:</p>
+
+<p>:concat "hello" "world"</p>
+]]></content>
+  </entry>
+  
+</feed>
