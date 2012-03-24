@@ -4,7 +4,7 @@
   <title><![CDATA[brweber2 blog]]></title>
   <link href="http://brweber2-blog.heroku.com/atom.xml" rel="self"/>
   <link href="http://brweber2-blog.heroku.com/"/>
-  <updated>2011-12-03T23:50:09-05:00</updated>
+  <updated>2012-03-24T19:44:11-04:00</updated>
   <id>http://brweber2-blog.heroku.com/</id>
   <author>
     <name><![CDATA[brweber2]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Logic-Redux]]></title>
+    <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-logic-redux/"/>
+    <updated>2012-03-24T18:25:00-04:00</updated>
+    <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-logic-redux</id>
+    <content type="html"><![CDATA[<p>If you are a professional programmer and you are not familiar with logic programming, then you should add it to your list of things to learn. It should probably be at, or at least very near, the front of the list as well.</p>
+
+<p>One excellent resource to learn Prolog is http://www.learnprolognow.org/.</p>
+
+<p>Logic programming is not great for writing all sorts of general applications, however it is an amazing tool for certain types of problems.</p>
+
+<p>More documentation to follow, but start out with the README file on github and play around with the REPL.  Don&#8217;t forget about the syntax differences between logic-redux and Prolog proper!</p>
+
+<p>https://github.com/brweber2/logic-redux</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Concat-Redux]]></title>
+    <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux/"/>
+    <updated>2012-03-24T18:25:00-04:00</updated>
+    <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux</id>
+    <content type="html"><![CDATA[<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
+
+<p>Concat-redux can be found here: https://github.com/brweber2/concat-redux</p>
+
+<p>concat-redux introduces one new piece of syntactic sugar to help with reading the language.</p>
+
+<p>A typical example would look like (reverse Polish notation):</p>
+
+<p>5 3 +</p>
+
+<p>Another example might be:</p>
+
+<p>&#8220;hello&#8221; &#8220;world&#8221; concat</p>
+
+<p>concat-redux introduces a new meaning to &#8216;:&#8217;</p>
+
+<p>Any word prefixed by a colon &#8216;:&#8217; is pushed before the next period &#8216;.&#8217;</p>
+
+<p>This enables the author to write the same code as:</p>
+
+<p>:concat &#8220;hello&#8221; &#8220;world&#8221;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Protogrid]]></title>
+    <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-protogrid/"/>
+    <updated>2012-03-24T18:24:00-04:00</updated>
+    <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-protogrid</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A binary file viewer]]></title>
