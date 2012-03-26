@@ -9,7 +9,7 @@
   <meta name="author" content="brweber2">
 
   
-  <meta name="description" content="Introducing concat-redux, a new concatenative programming language that runs on the JVM! Concat-redux can be found here: https://github.com/brweber2/ &hellip;">
+  <meta name="description" content="concat-redux Introducing concat-redux, a new concatenative programming language that runs on the JVM! concat-redux is conceptually similar to Forth &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,19 +88,27 @@
   </header>
 
 
-<div class="entry-content"><p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
+<div class="entry-content"><h1>concat-redux</h1>
 
-<p>Concat-redux can be found here: https://github.com/brweber2/concat-redux</p>
+<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
+
+<p>concat-redux is conceptually similar to <a href="http://en.wikipedia.org/wiki/Forth_(programming_language)">Forth</a> and <a href="http://factorcode.org">Factor</a></p>
+
+<p>concat-redux can be found on github at <a href="https://github.com/brweber2/concat-redux">https://github.com/brweber2/concat-redux</a></p>
+
+<h2>New Syntax</h2>
 
 <p>concat-redux introduces one new piece of syntactic sugar to help with reading the language.</p>
 
 <p>A typical example would look like (reverse Polish notation):</p>
 
-<p>5 3 +</p>
+<pre><code>5 3 +
+</code></pre>
 
 <p>Another example might be:</p>
 
-<p>&#8220;hello&#8221; &#8220;world&#8221; concat</p>
+<pre><code>"hello" "world" concat 
+</code></pre>
 
 <p>concat-redux introduces a new meaning to &#8216;:&#8217;</p>
 
@@ -108,7 +116,24 @@
 
 <p>This enables the author to write the same code as:</p>
 
-<p>:concat &#8220;hello&#8221; &#8220;world&#8221;</p>
+<pre><code>:concat "hello" "world" .
+</code></pre>
+
+<p>or</p>
+
+<pre><code>"hello" :concat "world" .
+</code></pre>
+
+<p>This flexibility allows you to move words around so that sections of code are easier to read by adding just one simple, unambiguous rule.</p>
+
+<h2>Why?</h2>
+
+<ul>
+<li>It runs on the JVM</li>
+<li>It has a REPL</li>
+<li>It can be used to quickly prototype an idea</li>
+</ul>
+
 </div>
 
 

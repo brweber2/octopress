@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Forth | brweber2 blog]]></title>
   <link href="http://brweber2-blog.heroku.com/blog/categories/forth/atom.xml" rel="self"/>
   <link href="http://brweber2-blog.heroku.com/"/>
-  <updated>2012-03-24T19:45:07-04:00</updated>
+  <updated>2012-03-25T21:36:16-04:00</updated>
   <id>http://brweber2-blog.heroku.com/</id>
   <author>
     <name><![CDATA[brweber2]]></name>
@@ -18,19 +18,27 @@
     <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux/"/>
     <updated>2012-03-24T18:25:00-04:00</updated>
     <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux</id>
-    <content type="html"><![CDATA[<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
+    <content type="html"><![CDATA[<h1>concat-redux</h1>
 
-<p>Concat-redux can be found here: https://github.com/brweber2/concat-redux</p>
+<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
+
+<p>concat-redux is conceptually similar to <a href="http://en.wikipedia.org/wiki/Forth_(programming_language)">Forth</a> and <a href="http://factorcode.org">Factor</a></p>
+
+<p>concat-redux can be found on github at <a href="https://github.com/brweber2/concat-redux">https://github.com/brweber2/concat-redux</a></p>
+
+<h2>New Syntax</h2>
 
 <p>concat-redux introduces one new piece of syntactic sugar to help with reading the language.</p>
 
 <p>A typical example would look like (reverse Polish notation):</p>
 
-<p>5 3 +</p>
+<pre><code>5 3 +
+</code></pre>
 
 <p>Another example might be:</p>
 
-<p>"hello" "world" concat</p>
+<pre><code>"hello" "world" concat 
+</code></pre>
 
 <p>concat-redux introduces a new meaning to ':'</p>
 
@@ -38,7 +46,24 @@
 
 <p>This enables the author to write the same code as:</p>
 
-<p>:concat "hello" "world"</p>
+<pre><code>:concat "hello" "world" .
+</code></pre>
+
+<p>or</p>
+
+<pre><code>"hello" :concat "world" .
+</code></pre>
+
+<p>This flexibility allows you to move words around so that sections of code are easier to read by adding just one simple, unambiguous rule.</p>
+
+<h2>Why?</h2>
+
+<ul>
+<li>It runs on the JVM</li>
+<li>It has a REPL</li>
+<li>It can be used to quickly prototype an idea</li>
+</ul>
+
 ]]></content>
   </entry>
   
