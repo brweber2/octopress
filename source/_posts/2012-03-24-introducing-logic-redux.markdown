@@ -31,3 +31,4 @@ Why use logic-redux instead of [TuProlog](http://alice.unibo.it/xwiki/bin/view/T
 * It has a REPL
 * Can be used with syntax or via a Java API
 
+Give it a try!

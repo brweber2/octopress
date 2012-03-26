@@ -44,3 +44,4 @@ This flexibility allows you to move words around so that sections of code are ea
 * It has a REPL
 * It can be used to quickly prototype an idea
 
+Give it a try!
