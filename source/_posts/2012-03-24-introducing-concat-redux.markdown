@@ -1,12 +1,10 @@
 ---
 layout: post
-title: "Introducing Concat-Redux"
+title: "Introducing concat-redux"
 date: 2012-03-24 18:25
 comments: false
 categories: [Concatenative, Forth, Factor, Programming Language]
 ---
-
-# concat-redux
 
 Introducing concat-redux, a new concatenative programming language that runs on the JVM!
 

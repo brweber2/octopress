@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Prolog | brweber2 blog]]></title>
   <link href="http://brweber2-blog.heroku.com/blog/categories/prolog/atom.xml" rel="self"/>
   <link href="http://brweber2-blog.heroku.com/"/>
-  <updated>2012-03-25T21:36:16-04:00</updated>
+  <updated>2012-03-25T21:39:19-04:00</updated>
   <id>http://brweber2-blog.heroku.com/</id>
   <author>
     <name><![CDATA[brweber2]]></name>
@@ -14,15 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Introducing Logic-Redux]]></title>
+    <title type="html"><![CDATA[Introducing logic-redux]]></title>
     <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-logic-redux/"/>
     <updated>2012-03-24T18:25:00-04:00</updated>
     <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-logic-redux</id>
-    <content type="html"><![CDATA[<h1>logic-redux</h1>
+    <content type="html"><![CDATA[<p>Introducing logic-redux, a new logic programming language that runs on the JVM that can be used with its own syntax or via a Java API.</p>
 
-<p>Introducing logic-redux, a new logic programming language that runs on the JVM that can be used with its own syntax or via a Java API.</p>
-
-<p>log-redux can be found on github at <a href="https://github.com/brweber2/logic-redux">https://github.com/brweber2/logic-redux</a></p>
+<p>logic-redux can be found on github at <a href="https://github.com/brweber2/logic-redux">https://github.com/brweber2/logic-redux</a></p>
 
 <h2>Learning</h2>
 
@@ -38,7 +36,7 @@
 
 <h2>Why?</h2>
 
-<p>Why use logic-redux instead of TuProlog or SWI-Prolog? Logic-redux is very simple and lightweight compared to both TuProlog and SWI-Prolog.  If you need to run on the JVM then SWI-Prolog is out.  If you need a full featured Prolog that runs on the JVM then I recommend using TuProlog.  If you need a simple way to declare facts and rules so that you can query them, then I suggest you give logic-redux a try!</p>
+<p>Why use logic-redux instead of TuProlog or SWI-Prolog? logic-redux is very simple and lightweight compared to both TuProlog and SWI-Prolog.  If you need to run on the JVM then SWI-Prolog is out.  If you need a full featured Prolog that runs on the JVM then I recommend using TuProlog.  If you need a simple way to declare facts and rules so that you can query them, then I suggest you give logic-redux a try!</p>
 ]]></content>
   </entry>
   

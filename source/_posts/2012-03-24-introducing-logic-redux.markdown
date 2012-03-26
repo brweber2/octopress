@@ -1,16 +1,14 @@
 ---
 layout: post
-title: "Introducing Logic-Redux"
+title: "Introducing logic-redux"
 date: 2012-03-24 18:25
 comments: false
 categories: [Prolog, Logic Programming, Programming Languages]
 ---
 
-# logic-redux
-
 Introducing logic-redux, a new logic programming language that runs on the JVM that can be used with its own syntax or via a Java API.
 
-log-redux can be found on github at <https://github.com/brweber2/logic-redux>
+logic-redux can be found on github at <https://github.com/brweber2/logic-redux>
 
 ## Learning
 
@@ -26,5 +24,5 @@ More documentation to follow, but start out with the [README](https://github.com
 
 ## Why?
 
-Why use logic-redux instead of TuProlog or SWI-Prolog? Logic-redux is very simple and lightweight compared to both TuProlog and SWI-Prolog.  If you need to run on the JVM then SWI-Prolog is out.  If you need a full featured Prolog that runs on the JVM then I recommend using TuProlog.  If you need a simple way to declare facts and rules so that you can query them, then I suggest you give logic-redux a try!
+Why use logic-redux instead of TuProlog or SWI-Prolog? logic-redux is very simple and lightweight compared to both TuProlog and SWI-Prolog.  If you need to run on the JVM then SWI-Prolog is out.  If you need a full featured Prolog that runs on the JVM then I recommend using TuProlog.  If you need a simple way to declare facts and rules so that you can query them, then I suggest you give logic-redux a try!
 

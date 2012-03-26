@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming Language | brweber2 blog]]></title>
   <link href="http://brweber2-blog.heroku.com/blog/categories/programming-language/atom.xml" rel="self"/>
   <link href="http://brweber2-blog.heroku.com/"/>
-  <updated>2012-03-25T21:36:16-04:00</updated>
+  <updated>2012-03-25T21:39:19-04:00</updated>
   <id>http://brweber2-blog.heroku.com/</id>
   <author>
     <name><![CDATA[brweber2]]></name>
@@ -14,13 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Introducing Concat-Redux]]></title>
+    <title type="html"><![CDATA[Introducing concat-redux]]></title>
     <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux/"/>
     <updated>2012-03-24T18:25:00-04:00</updated>
     <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux</id>
-    <content type="html"><![CDATA[<h1>concat-redux</h1>
-
-<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
+    <content type="html"><![CDATA[<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
 
 <p>concat-redux is conceptually similar to <a href="http://en.wikipedia.org/wiki/Forth_(programming_language)">Forth</a> and <a href="http://factorcode.org">Factor</a></p>
 
