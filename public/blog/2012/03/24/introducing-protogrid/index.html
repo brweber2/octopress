@@ -9,7 +9,7 @@
   <meta name="author" content="brweber2">
 
   
-  <meta name="description" content="Protogrid is a prototype based programming language that runs on the JVM. More details can be found here and the project can be found on github at &hellip;">
+  <meta name="description" content="Protogrid is a dynamically typed, prototype based programming language that runs on the JVM. The project can be found on github at https://github.com &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,9 +88,9 @@
   </header>
 
 
-<div class="entry-content"><p>Protogrid is a prototype based programming language that runs on the JVM.</p>
+<div class="entry-content"><p>Protogrid is a dynamically typed, prototype based programming language that runs on the JVM.</p>
 
-<p>More details can be found <a href="http://www.brweber2.com/blog">here</a> and the project can be found on github at <a href="https://github.com/brweber2/protogrid">https://github.com/brweber2/protogrid</a></p>
+<p>The project can be found on github at <a href="https://github.com/brweber2/protogrid">https://github.com/brweber2/protogrid</a></p>
 
 <h2>Why?</h2>
 
@@ -102,236 +102,205 @@
 </ul>
 
 
-<h2>Introduction</h2>
+<h1>Introduction</h1>
 
-<p>Protogrid is a dynamically typed, prototype based programming language that runs on the JVM.</p>
-
-<p>It can be found on github at <a title="http://www.github.com/brweber2/protogrid" href="http://www.github.com/brweber2/protogrid">http://www.github.com/brweber2/protogrid</a></p>
-
-<h1><strong>For users:</strong></h1>
-
+<h2>For users</h2>
 
 <p>Protogrid strives to be simple to write and read.  Each form is intended to mean one thing so there should not be any confusion once you become familiar with the syntax.  In many ways this one to one mapping of syntax and semantics has been a simplifying and limiting factor in the design of the language.  This is especially true for developers who come to protogrid with pre-conceived notions from past experience.</p>
 
 <ul>
-    <li>There is a single keyword &#8216;var&#8217;.</li>
-    <li>nil, undefined, true and false are built in prototypes.</li>
-    <li>In protogrid there is a single numeric type.</li>
-    <li>Variable names cannot contain numbers.</li>
-    <li>Parenthesis always indicate function application, even when there is no function to apply.  For example, parenthesis used for changing or specifying order of operation precedence are strictly evaluated and the resulting value is left as the current context, but no function invocation actually takes place.</li>
-    <li>Brackets indicate a function declaration.</li>
-    <li>Braces indicate a scoped block.</li>
-    <li>Single = denotes assignment.</li>
+<li>There is a single keyword &#8216;var&#8217;.</li>
+<li>nil, undefined, true and false are built in prototypes.</li>
+<li>In protogrid there is a single numeric type.</li>
+<li>Variable names cannot contain numbers.</li>
+<li>Parenthesis always indicate function application, even when there is no function to apply.  For example, parenthesis used for changing or specifying order of operation precedence are strictly evaluated and the resulting value is left as the current context, but no function invocation actually takes place.</li>
+<li>Brackets indicate a function declaration.</li>
+<li>Braces indicate a scoped block.</li>
+<li>Single = denotes assignment.</li>
 </ul>
 
 
-<h1><strong>For programming language enthusiasts:</strong></h1>
-
+<h2>For programming language enthusiasts</h2>
 
 <p>Unfortunately, there isn&#8217;t much here that will excite you.  Protogrid introduces <del>virtually</del> no new programming paradigms, it merely strives to make the developer experience more enjoyable.  The current form of Java interop is not something I&#8217;ve seen in any other language that runs on the JVM, but it is not something new or revolutionary.  It is arguably a nicer reflection API.  And yes, you will cringe if you look under the hood.  The implementation is insanely naive and non-performant in every aspect imaginable.</p>
 
-<p>&nbsp;</p>
-
-<h1><strong>Java Interop</strong></h1>
-
+<h2>Java Interop</h2>
 
 <p>To start interacting with the underlying Java platform, the first step is typically to wrap a Java class.</p>
 
-<blockquote>var JavaString = WrapClass( java.lang.String )</blockquote>
-
-
-<p>&nbsp;</p>
+<pre><code>var JavaString = WrapClass( java.lang.String )
+</code></pre>
 
 <p>The JavaString prototype now is a wrapped Java class.  It can be used in one of two ways.</p>
 
-<ol>
-    <li>If invoked the arguments are used to determine which constructor should be called at runtime and if successful a wrapped instance is returned.</li>
-    <li>Accessing a slot on the wrapped class will look for a field.  If one is found a wrapped field is returned.  If no field is found, a wrapped methods prototype is returned that wraps all the static methods on the class with the matching name.  If this wrapped methods prototype is invoked it uses the arguments passed to it to determine at runtime which specific method should be invoked and a wrapped instance is returned with the result of the invocation.</li>
-</ol>
+<ul>
+<li>If invoked the arguments are used to determine which constructor should be called at runtime and if successful a wrapped instance is returned.</li>
+<li>Accessing a slot on the wrapped class will look for a field. If one is found a wrapped field is returned.  If no field is found, a wrapped methods prototype is returned that wraps all the static methods on the class with the matching name.  If this wrapped methods prototype is invoked it uses the arguments passed to it to determine at runtime which specific method should be invoked and a wrapped instance is returned with the result of the invocation.</li>
+</ul>
 
 
 <p>&nbsp;</p>
 
-<blockquote>var message = JavaString.format( &#8220;Hello %s&#8221;, &#8220;World!&#8221; )</blockquote>
-
+<pre><code>var message = JavaString.format( "Hello %s", "World!" )
+</code></pre>
 
 <p>There are a few points of interest here.  There is more than one static format method on java.lang.String.  Additionally, the String &#8220;World!&#8221; is converted to an Object[] to support the variadic version of the format method used here.</p>
 
 <p>A wrapped instance is a prototype that can be used with the protogrid, but that can be coerced back to its native Java type when necessary.</p>
 
-<p>&nbsp;</p>
+<pre><code>println( message.toUpperCase() )
+</code></pre>
 
-<blockquote>println( message.toUpperCase() )</blockquote>
-
-
-<h2>What&#8217;s missing from the interop story?</h2>
-
+<h3>What&#8217;s missing from the interop story?</h3>
 
 <p>Quite a bit.  There is currently no way to implement an interface, to extend a class or to create a new interface or class.</p>
 
-<h1>Show me more!</h1>
+<h2>Show me more!</h2>
 
-
-<h2>Creating a new prototype</h2>
-
+<h3>Creating a new prototype</h3>
 
 <p>Simply clone an existing prototype</p>
 
-<blockquote>var MyProto = clone( Object )</blockquote>
-
+<pre><code>var MyProto = clone( Object )
+</code></pre>
 
 <p>Setting and accessing slots on the prototype is trivial</p>
 
-<blockquote>MyProto.foo = &#8220;barbaz&#8221;
+<pre><code>MyProto.foo = "barbaz"
 
-println( MyProto.foo )</blockquote>
-
+println( MyProto.foo )
+</code></pre>
 
 <p>Inspecting the prototype</p>
 
-<blockquote>println( MyProto.slots() )</blockquote>
+<pre><code>println( MyProto.slots() )
+</code></pre>
 
-
-<h2>Viewing the AST</h2>
-
+<h3>Viewing the AST</h3>
 
 <p>At any point, the built in ast function can be called to print out a readable form of the Abstract Syntax Tree if there is every any doubt about what the interpreter is seeing.</p>
 
-<blockquote>ast( 2 + 3 * 4 ^ 5 % 6 )</blockquote>
-
+<pre><code>ast( 2 + 3 * 4 ^ 5 % 6 )
+</code></pre>
 
 <p>This will result in the following AST</p>
 
-<blockquote>(  2   +  ( (  3   *  (  4   ^   5  )  )   %   6  )  )</blockquote>
+<pre><code>(  2   +  ( (  3   *  (  4   ^   5  )  )   %   6  )  )
+</code></pre>
 
-
-<h2>Loading code from a file</h2>
-
+<h3>Loading code from a file</h3>
 
 <p>When loading code from a file, any side effects will occur at load time and a scope object with all the top level definitions from the file will be returned.  This can be assigned to a variable and values and functions can be accessed without worrying about collisions within the current scope.</p>
 
 <p>Suppose we have a file located at src/hello_world.grid relative to the current directory with the following content.</p>
 
-<blockquote>var sayHelloTo = [name] { println( strf( &#8220;Hello %s&#8221; List(name) ) ) }</blockquote>
-
+<pre><code>var sayHelloTo = [name] { println( strf( "Hello %s" List(name) ) ) }
+</code></pre>
 
 <p>To load this file, simply call the built in load function.</p>
 
-<blockquote>var ns = load( &#8220;src/hello_world.grid&#8221; )
+<pre><code>var ns = load( "src/hello_world.grid" )
 
-ns.sayHelloTo( &#8220;Flynn&#8221; )</blockquote>
-
+ns.sayHelloTo( "Flynn" )
+</code></pre>
 
 <p>If you do not want to namespace any particular functions it is possible to map them into the curent scope by simply assigning them to a variable.</p>
 
-<blockquote>var sayHelloTo = ns.sayHelloTo</blockquote>
+<pre><code>var sayHelloTo = ns.sayHelloTo
+</code></pre>
 
+<h3>Operators</h3>
 
-<h2>Operators</h2>
+<p>Math +  -  *  /  %  ^</p>
 
+<p>Logic &amp;&amp;  ||</p>
 
-<p>Math + - * / % ^</p>
+<p>Comparison ==  !=  &lt;  &lt;=  >  >=</p>
 
-<p>Logic &amp;&amp; ||</p>
-
-<p>Comparison == != &lt; &lt;= &gt; &gt;=</p>
-
-<h2>Control Flow</h2>
-
+<h3>Control Flow</h3>
 
 <p>There are built in functions for conditionals, looping, exceptions and exception handling.</p>
 
 <p>Conditionals</p>
 
-<blockquote>if ( true println( &#8220;true&#8221; ) println( &#8220;false&#8221; ) )
+<pre><code>if ( true println( "true" ) println( "false" ) )
 
-if ( &lt;cond&gt; &lt;true expr&gt; &lt;false expr&gt; )</blockquote>
-
+if ( &lt;cond&gt; &lt;true expr&gt; &lt;false expr&gt; )
+</code></pre>
 
 <p>Looping</p>
 
-<blockquote>loop( &lt;structure&gt; &lt;function&gt; )</blockquote>
-
+<pre><code>loop( &lt;structure&gt; &lt;function&gt; )
+</code></pre>
 
 <p>The function passed to loop must have two parameters, the value for each iteration and in the index number of the iteration (zero based).</p>
 
-<blockquote>while( &lt;condition&gt; &lt;block&gt; )</blockquote>
-
+<pre><code>while( &lt;condition&gt; &lt;block&gt; )
+</code></pre>
 
 <p>Exceptions</p>
 
-<blockquote>var err = error( &#8220;Uh oh&#8221; )
+<pre><code>var err = error( "Uh oh" )
 
 raise( err )
 
-try ( &lt;block&gt; &lt;finally-block&gt; )</blockquote>
-
+try ( &lt;block&gt; &lt;finally-block&gt; )
+</code></pre>
 
 <p>But what about catching the exceptions?  A try block does not return the result of the block, it returns an object that contains a boolean indicating whether or not an exception was thrown and either the exception or the resultant value.  It is therefore possible to access slots on the resultant prototype to perform whatever error handling is necessary.</p>
 
-<blockquote>var t = try( socket.write() socket.close() )
+<pre><code>var t = try( socket.write() socket.close() )
 
-if ( t.hasError raise( t.error ) t.result )</blockquote>
+if ( t.hasError raise( t.error ) t.result )
+</code></pre>
 
-
-<h2>Composite Data Structures</h2>
-
+<h3>Composite Data Structures</h3>
 
 <p>There are lists. There is a built in function to construct them and they can contain an object of any type.  Lists are zero indexed for access operations.</p>
 
-<blockquote>var names = List( &#8220;Kevin&#8221;, &#8220;Sam&#8221;, &#8220;Quorra&#8221; )
+<pre><code>var names = List( "Kevin", "Sam", "Quorra" )
 
-println( names.get( 1 ) )</blockquote>
+println( names.get( 1 ) )
+</code></pre>
 
+<h2>Because I have to&#8230;</h2>
 
-<h1>Because I have to&#8230;</h1>
+<h3>Hello World</h3>
 
+<pre><code>println( "Hello world!" )
+</code></pre>
 
-<h2></h2>
+<h3>Factorial</h3>
 
-
-<h2>Hello World</h2>
-
-
-<blockquote>println( &#8220;Hello world!&#8221; )</blockquote>
-
-
-<h2>Factorial</h2>
-
-
-<blockquote>var fac = [n] {
-<p style="padding-left: 30px;">if ( n == 0 || n == 1</p>
-<p style="padding-left: 30px;">1</p>
-<p style="padding-left: 30px;">n * recur( n - 1 )  )</p>
-}</blockquote>
-
+<pre><code>var fac = [n] {
+    if ( n == 0 || n == 1
+    1
+    n * recur( n - 1 )  )
+}
+</code></pre>
 
 <p>In protogrid, recursion is achieved by calling the recur function instead of the current function by name.</p>
 
-<h1><strong>Getting started</strong></h1>
-
+<h2>Getting started</h2>
 
 <p>The best way to get started is to download the executable protogrid jar and start experimenting with the REPL.  Syntax highlighting for IntelliJ IDEA and TextMate will be added to github in the very near future.</p>
 
-<h2><strong>Down the road</strong></h2>
-
+<h4>Down the road</h4>
 
 <ul>
-    <li>Syntax highlighting</li>
-    <li>Compiled version</li>
-    <li>Debugger</li>
-    <li>Static typing</li>
-    <li>Lazy evaluation</li>
-    <li>Macros</li>
-    <li>Named arguments</li>
-    <li>Default values for parameters</li>
-    <li>Richer Java interop</li>
-    <li>De-structuring</li>
-    <li>Targeting other platforms</li>
+<li>Syntax highlighting</li>
+<li>Compiled version</li>
+<li>Debugger</li>
+<li>Static typing</li>
+<li>Lazy evaluation</li>
+<li>Macros</li>
+<li>Named arguments</li>
+<li>Default values for parameters</li>
+<li>Richer Java interop</li>
+<li>De-structuring</li>
+<li>Targeting other platforms</li>
 </ul>
 
-
-<p>&nbsp;</p>
 </div>
 
 
