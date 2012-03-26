@@ -24,5 +24,10 @@ More documentation to follow, but start out with the [README](https://github.com
 
 ## Why?
 
-Why use logic-redux instead of TuProlog or SWI-Prolog? logic-redux is very simple and lightweight compared to both TuProlog and SWI-Prolog.  If you need to run on the JVM then SWI-Prolog is out.  If you need a full featured Prolog that runs on the JVM then I recommend using TuProlog.  If you need a simple way to declare facts and rules so that you can query them, then I suggest you give logic-redux a try!
+Why use logic-redux instead of [TuProlog](http://alice.unibo.it/xwiki/bin/view/Tuprolog) or [SWI-Prolog](http://www.swi-prolog.org)? logic-redux is very simple and lightweight compared to both TuProlog and SWI-Prolog.  If you need to run on the JVM then SWI-Prolog is out.  If you need a full featured Prolog that runs on the JVM then I recommend using TuProlog.  If you need a simple way to declare facts and rules so that you can query them, then I suggest you give logic-redux a try!
+
+* Runs on the JVM
+* Simple, lightweight implementation
+* It has a REPL
+* Can be used with syntax or via a Java API
 
