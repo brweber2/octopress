@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Programming Language | brweber2 blog]]></title>
-  <link href="http://brweber2-blog.heroku.com/blog/categories/programming-language/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Prototype | brweber2 blog]]></title>
+  <link href="http://brweber2-blog.heroku.com/blog/categories/prototype/atom.xml" rel="self"/>
   <link href="http://brweber2-blog.heroku.com/"/>
   <updated>2012-03-25T22:03:02-04:00</updated>
   <id>http://brweber2-blog.heroku.com/</id>
@@ -12,97 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Introducing logic-redux]]></title>
-    <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-logic-redux/"/>
-    <updated>2012-03-24T18:25:00-04:00</updated>
-    <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-logic-redux</id>
-    <content type="html"><![CDATA[<p>Introducing logic-redux, a new logic programming language that runs on the JVM that can be used with its own syntax or via a Java API.</p>
-
-<p>logic-redux can be found on github at <a href="https://github.com/brweber2/logic-redux">https://github.com/brweber2/logic-redux</a></p>
-
-<h2>Learning</h2>
-
-<p>If you are a professional programmer and you are not familiar with logic programming, then you should add it to your list of things to learn. It should probably be at, or at least very near, the front of the list as well.</p>
-
-<p>One excellent resource to learn Prolog is <a href="http://www.learnprolognow.org">http://www.learnprolognow.org</a></p>
-
-<p>Logic programming is <em>not</em> wonderful for writing all sorts of general applications, however it is an amazing tool for solving certain types of problems.</p>
-
-<h2>Documentation</h2>
-
-<p>More documentation to follow, but start out with the <a href="https://github.com/brweber2/logic-redux">README</a> file on github and play around with the REPL.  Don't forget about the syntax differences between logic-redux and Prolog proper! The biggest being that in logic-redux variables are always prefixed with the '@' character.</p>
-
-<h2>Why?</h2>
-
-<p>Why use logic-redux instead of <a href="http://alice.unibo.it/xwiki/bin/view/Tuprolog">TuProlog</a> or <a href="http://www.swi-prolog.org">SWI-Prolog</a>? logic-redux is very simple and lightweight compared to both TuProlog and SWI-Prolog.  If you need to run on the JVM then SWI-Prolog is out.  If you need a full featured Prolog that runs on the JVM then I recommend using TuProlog.  If you need a simple way to declare facts and rules so that you can query them, then I suggest you give logic-redux a try!</p>
-
-<ul>
-<li>Runs on the JVM</li>
-<li>Simple, lightweight implementation</li>
-<li>It has a REPL</li>
-<li>Can be used with syntax or via a Java API</li>
-</ul>
-
-
-<p>Give it a try!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Introducing concat-redux]]></title>
-    <link href="http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux/"/>
-    <updated>2012-03-24T18:25:00-04:00</updated>
-    <id>http://brweber2-blog.heroku.com/blog/2012/03/24/introducing-concat-redux</id>
-    <content type="html"><![CDATA[<p>Introducing concat-redux, a new concatenative programming language that runs on the JVM!</p>
-
-<p>concat-redux is conceptually similar to <a href="http://en.wikipedia.org/wiki/Forth_(programming_language)">Forth</a> and <a href="http://factorcode.org">Factor</a></p>
-
-<p>concat-redux can be found on github at <a href="https://github.com/brweber2/concat-redux">https://github.com/brweber2/concat-redux</a></p>
-
-<h2>New Syntax</h2>
-
-<p>concat-redux introduces one new piece of syntactic sugar to help with reading the language.</p>
-
-<p>A typical example would look like (reverse Polish notation):</p>
-
-<pre><code>5 3 +
-</code></pre>
-
-<p>Another example might be:</p>
-
-<pre><code>"hello" "world" concat 
-</code></pre>
-
-<p>concat-redux introduces a new meaning to ':'</p>
-
-<p>Any word prefixed by a colon ':' is pushed before the next period '.'</p>
-
-<p>This enables the author to write the same code as:</p>
-
-<pre><code>:concat "hello" "world" .
-</code></pre>
-
-<p>or</p>
-
-<pre><code>"hello" :concat "world" .
-</code></pre>
-
-<p>This flexibility allows you to move words around so that sections of code are easier to read by adding just one simple, unambiguous rule.</p>
-
-<h2>Why?</h2>
-
-<ul>
-<li>It runs on the JVM</li>
-<li>It has a REPL</li>
-<li>It can be used to quickly prototype an idea</li>
-</ul>
-
-
-<p>Give it a try!</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Introducing Protogrid]]></title>

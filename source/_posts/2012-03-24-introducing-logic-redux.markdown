@@ -3,7 +3,7 @@ layout: post
 title: "Introducing logic-redux"
 date: 2012-03-24 18:25
 comments: false
-categories: [Prolog, Logic Programming, Programming Languages]
+categories: [logic-redux, Prolog, Logic Programming, Programming Language, JVM]
 ---
 
 Introducing logic-redux, a new logic programming language that runs on the JVM that can be used with its own syntax or via a Java API.
